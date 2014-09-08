@@ -1,4 +1,4 @@
-<% 
+﻿<% 
         Response.ContentType = "text/html"
     Response.AddHeader "Content-Type", "text/html;charset=UTF-8"
     Response.CodePage = 65001
@@ -7,10 +7,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<meta http-equiv="content-type" content="text/html; charset=windows-1251" />
-
+<meta http-equiv="content-type" content="text/html; charset=windows-1251" />
 <head id="Head1"><title>
-	E-Dom?stico - Login
+	E-Doméstico - Login
 </title><link rel="stylesheet" type="text/css" href="/Content/css/styles.css" media="screen" />
 	<script type="text/javascript" src="/Scripts/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="/Scripts/jquery-ui-1.8.2.custom.min.js"></script>
@@ -62,7 +61,7 @@
 	            messages: {
 	                Email: {
 	                    required: "Preencha o e-mail",
-	                    email: "E-mail inv?lido"
+	                    email: "E-mail inválido"
 	                },
 	                Senha: "Preencha a senha"
 	            }
@@ -78,7 +77,7 @@
 		<div class="sb-box auth">
 			<div class="sb-box-inner content">
 				<!-- Authorization block header [begin] -->
-				<div class="header"><h3>Por favor, fa?a o login</h3></div>
+				<div class="header"><h3>Por favor, faça o login</h3></div>
 				<!-- Authorization block header [end] -->
 				<div class="bcont">
 					<!-- Authorization content [begin] -->
@@ -88,7 +87,7 @@
 <%if session("erro")<>"" then
     
     strErro=session("erro") 
-    if instr(1,strErro,"expirada")>0 then strErro="Sess?o expirada. Favor logar novamente."
+    if instr(1,strErro,"expirada")>0 then strErro="Sessão expirada. Favor logar novamente."
     %>
 						<div id="erro" class="message error" style="display:none;">
 							<span class="strong">ERRO!</span> 

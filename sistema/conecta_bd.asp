@@ -521,25 +521,25 @@ function formataDatas(dataIn)
             case 2
                     outDatas=outDatas & " fevereiro de "
             case 3
-                outDatas=outDatas & " mar&ccedil;o de "
+    outDatas=outDatas & " mar&ccedil;o de "
             case 4
-                outDatas=outDatas & " abril de "
+    outDatas=outDatas & " abril de "
             case 5
-                outDatas=outDatas & " maio de "
+    outDatas=outDatas & " maio de "
             case 6
-                outDatas=outDatas & " junho de "
+    outDatas=outDatas & " junho de "
             case 7
-                outDatas=outDatas & " julho de "
+    outDatas=outDatas & " julho de "
             case 8
-                outDatas=outDatas & " agosto de "
+    outDatas=outDatas & " agosto de "
             case 9
-                outDatas=outDatas & " setembro de "
+    outDatas=outDatas & " setembro de "
             case 10
-                outDatas=outDatas & " outubro de "
+    outDatas=outDatas & " outubro de "
             case 11
-                outDatas=outDatas & " novembro de "
+    outDatas=outDatas & " novembro de "
             case 12
-                outDatas=outDatas & " dezembro de "
+    outDatas=outDatas & " dezembro de "
             
         end select
         outDatas=outDatas & year(dataIn)

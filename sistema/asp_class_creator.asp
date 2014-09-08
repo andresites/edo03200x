@@ -14,6 +14,7 @@
 '	Notes: This will work as long as you dont miss any fields, still no documentation
 '==================================================================================
     ConnString ="Provider=Sqloledb; User ID=edomestico_test; Password=Infosys; Initial Catalog=edomestico_test;Data Source=PALM.arvixe.com"
+
 if request.Form <> "" then
 	'ConnString 			= request.Form("connstring")
 	databasename 		= request.Form("databasename")

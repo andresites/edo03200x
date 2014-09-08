@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    IMPRESSOS
+    				            <div class="sb-box-inner content">
+					            <div class="header">
+						            <h3>DUCUMENTOS PARA IMPRESSÃO</h3>
+					            </div>
+                                <div id="Div4" class="message AttentionExp" style="margin:27px; width:360px;">
+                                         <b>Atenção!<br /></b> <b>IMPRIMA</b> os documentos listados abaixo, peça para seu empregado assinar e os guarde com muito cuidado!<br />
+                                        Eles serão de suma importância em caso de eventual processo trabalhista do funcionário contra você.
+                                </div>
+                                <div class="bcont">
+						            <table class="infotable" cellspacing="0" cellpadding="0" width="100%">
+							            <tbody>
+                                            <%
+                                            '<!--
+                                            '    DEVEM SER ADICIONADAS AO OBJETO CONTRATO:
+                                            '        1- bolImrimiuReciboCT
+                                            '        2- bolImprimiuModeloCT
+                                            '        3- bolImrpimiuContrato
+                                             '       4- bolImprimiuSolicitacaoVT
+                                             '       5- bolImprimiuAbreMaoVT
+                                             '       6- bolVeioDeAgenciaDeTrabalho (e coletar dados da agencia de trabalho...)
+                                             '     
+                                             '   ELES DEVEM SER FALSE POR DEFAULT E VIRAM TRUE QUANDO É IMPRESSO O RESPECTIVO ITEM
+                                             '   
+                                             '   --> %>
+								            <tr>
+									            <th>
+										            <a href="prtFolhaFaltas.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">IMPRIMIR FOLHA DE PONTO</a>
+									            </th>
+                                            </tr>
+
+								            <tr>
+									            <th>
+										            <a href="prtRecCT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">IMPRIMIR RECIBO DA CARTEIRA DE TRABALHO </a>
+									            </th>
+                                            </tr>
+
+								            <tr>
+									            <th>
+										            <a href="prtModCartTrab.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">IMPRIMIR MODELO PARA PREENCHIMENTO DA CARTEIRA DE TRABALHO </a>
+									            </th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+										            <a href="prtCT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">IMPRIMIR CONTRATO DE TRABALHO</a>
+									            </th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+										            <a href="prtSolVT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">IMPRIMIR SOLICITAÇÃO DE VALE TRANSPORTE (CASO FOR UTILIZAR)</a>
+									            </th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+										            <a href="prtDecNVT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">DECLARAÇÃO DE NÃO BENEFICIÁRIO DO VALE-TRANSPORTE (deverá ser assinada pelo empregado caso ele abra mão de receber o vale transporte ou durma no emprego)</a>
+									            </th>
+								            </tr>
+                                            <%if esseContrato.bolVeioDeAgenciaDeTrabalho = true then %>
+                                            <tr>
+                                                <th>
+										            <a href="ptrCompAg.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" target="_blank">DECLARAÇÃO DE COMPROMISSO DA AGÊNCIA</a>
+									            </th>
+								            </tr>
+                                            <%end if %>
+							            </tbody>
+						            </table>
+					            </div>
+                            </div>
+
+
+    FIM IMPRESSOS
+    VALE TRANSPORTE
+				            <div class="sb-box-inner content">
+                                <div class="header">
+						            <h3>VALE TRANSPORTE</h3>
+					            
+                                    <ul class="tabs">
+                                        <li class="active" >
+                                                <a href="prtDecNVT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" hidefocus="true" style="outline: none; background-color:#E6B8B8"  target="_blank">DECLARAÇÃO DE NÃO BENEFICIÁRIO </a>
+                                        </li>
+                                        <li class="active" >
+                                                <a href="prtSolVT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" hidefocus="true" style="outline: none; background-color:#E6B8B8"  target="_blank">DECLARAÇÃO DE CONCESSÃO</a>
+                                        </li>
+                                        <li class="active" >
+                                                <a href="empregado_novoVT.asp?novoContratoID=<%=novoContratoID %>&funcID=<%=funcID %>" hidefocus="true" style="outline: none; background-color:#E6B8B8">NOVO VALE TRANSPORTE</a>
+                                        </li>
+
+                                    </ul>
+                                 </div>
+                                <div class="bcont">  
+                                  <table class="infotable" cellspacing="0" cellpadding="0" width="100%">
+                                     
+
+                            <%
+                                set myVales = fulano.listaValeTransporte(2014)
+                                if (myVales.bof and myVales.eof) then
+                                    response.Write "sem vales"
+                                else
+                                    response.Write "<thead><tr><th>Mês Referência</th><th>Período Início</th><th>Período Fim</th><th>Valor</th><th class=""small""></th></tr></thead><tbody>"
+
+                                    while not myVales.eof
+%>
+                                      <tr>
+                                          <td><%=myVales("MesReferencia") %>/<%=myVales("anoReferencia") %></td>
+                                          <td><%=myVales("periodoInicio") %></td>
+                                          <td><%=myVales("periodofim") %></td>
+                                          <td><%= formatcurrency(myVales("Valor"),2) %></td>
+                                          <td class="small">
+                                              
+                                               <ul>
+                                                        <li><a href="empregado_novoVT.asp?vtID=<%=myVales("ID") %>&funcID=<%=funcID %>&modo=alterar">EDITAR</a><br /></li>
+                                                        <li><a href="prtRecValeTransporte.asp?vtID=<%=myVales("ID") %>&funcID=<%=funcID %>" target="_blank">EMITIR RECIBO</a><br /></li>
+                                                   </ul>
+                                             
+                                            
+                                      
+                                            </td>
+
+                                      </tr>
+                                      <%       
+                                        myVales.movenext
+                                    wend
+                                end if
+                                myVales.close
+                                set myVales=nothing
+                                
+                                 %>  </tbody>
+                                      </table>
+                                </div>
+				            </div>                  
+    FIM VALE TRANSPORTE
+    ADIANTAMENTOS E VALES
+                                                   <div id="Adiantamentos"  class="sb-box-inner content">
+                                                    <div class="header">
+                                                        <h3>Registro de Adiantamentos</h3>
+                                                        <ul>
+                                                            <li class="active" >
+                                                                    <a href="empregado_lanca_adiantamento.asp?ID=<%=funcID %>" hidefocus="true" style="outline: none; background-color:#E6B8B8">LANÇAR ADIANTAMENTO</a>
+                                                            </li>
+                                                        </ul>
+                                                        </div>
+                    <%
+                        
+
+                                            set meusAdiantamentos = fulano.getRecordsetOfAdiantamentos()
+                                            if not (meusAdiantamentos.BOF and meusAdiantamentos.EOF) then
+                        %>
+                                                    <table class="infotable" cellspacing="0" cellpadding="0" width="100%">
+							                    <thead>
+								                    <tr>
+                                                        <th>
+										                   Valor
+									                    </th>
+                                                        <th>
+										                    Mês Referência
+									                    </th>
+                                                        <th>
+										                    Ano Referência
+									                    </th>
+									                    <th class="small">
+									                    </th>
+								                    </tr>
+							                    </thead>
+							                    <tbody>
+
+                                                    <%
+    
+                                                while not meusAdiantamentos.EOF
+                               
+                                                        %>
+                                                    <tr>
+
+                                                        <td><%= formatCurrency( meusAdiantamentos("valor"),2 ) %></td>
+                                                        <td><%
+                                                            mesSelecionado=meusAdiantamentos("mesReferencia")
+                                                            Select case mesSelecionado
+                                                                        case 1
+                                                                            response.Write " janeiro de "
+                                                                        case 2
+                                                                                response.Write  " fevereiro de "
+                                                                        case 3
+                                                                            response.Write  " mar&ccedil;o de "
+                                                                        case 4
+                                                                            response.Write  " abril de "
+                                                                        case 5
+                                                                            response.Write  " maio de "
+                                                                        case 6
+                                                                            response.Write  " junho de "
+                                                                        case 7
+                                                                            response.Write " julho de "
+                                                                        case 8
+                                                                            response.Write  " agosto de "
+                                                                        case 9
+                                                                            response.Write  " setembro de "
+                                                                        case 10
+                                                                             response.Write " outubro de "
+                                                                        case 11
+                                                                            response.Write " novembro de "
+                                                                        case 12
+                                                                             response.Write  " dezembro de "
+                                                            end select
+
+                                                            %></td>
+                                                        <td><%=meusAdiantamentos("anoReferencia")%></td>
+                                                        <td class="small"></td>
+                                                    </tr>
+                                                    <%
+
+                                                    meusAdiantamentos.movenext
+                                                wend
+                                            else
+                                                response.Write "Não há adiantamentos"
+                                            end if
+                                              meusAdiantamentos.close
+                                              set meusAdiantamentos =nothing
+                                             %>            
+                                               </tbody>
+                                            </table>
+                                                </div>    
+
+
+FIM ADIANTAMENTOS E VALES                            
+FALTAS
+                            <div id="faltas"  class="sb-box-inner content">
+                                <div class="header">
+                                    <h3>Registro de Faltas</h3>
+                                    <ul>
+                                        <li class="active" >
+                                                <a href="empregado_lanca_falta.asp?ID=<%=funcID %>" hidefocus="true" style="outline: none; background-color:#E6B8B8">LANÇAR FALTA</a>
+                                        </li>
+                                    </ul>
+                                    </div>
+<%
+                        
+
+                        set minhasFaltas = fulano.getRecordsetOfFaltas()
+                        if not (minhasFaltas.BOF and minhasFaltas.EOF) then
+    %>
+                                <table class="infotable" cellspacing="0" cellpadding="0" width="100%">
+							<thead>
+								<tr>
+                                    <th>
+										Data da Falta
+									</th>
+                                    <th>
+										Tipo
+									</th>
+                                    <th>
+										Comentários
+									</th>
+									<th class="small">
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+                                <%
+    
+                            while not minhasFaltas.EOF
+                               
+                                    %>
+                                <tr>
+
+                                    <td><%= formataDatas( minhasFaltas("DataFalta") ) %></td>
+                                    <td><%if minhasFaltas("tipofaltaID")=2 then response.Write "Falta Justificada" else response.Write "Falta Não Justificada"  %></td>
+                                    <td><%if len(minhasFaltas("Comentarios"))>0  then response.Write server.HTMLEncode(minhasFaltas("Comentarios"))  else response.Write "-"  %></td>
+                                    <td class="small"></td>
+                                </tr>
+                                <%
+
+                                minhasFaltas.movenext
+                            wend
+                        else
+                            response.Write "Não há faltas"
+                        end if
+                          minhasFaltas.close
+                          set minhasFaltas =nothing
+                         %>            
+                           </tbody>
+                        </table>
+                            </div>    
+
+
+FIM FALTAS
+ADVERTENCIAS
+                                 <div id="advertencias"  class="sb-box-inner content">
+                                <div class="header">
+                                    <h3>Registro de Advertências</h3>
+                                    <ul>
+                                        <li class="active" >
+                                                <a href="empregado_lanca_advertencia.asp?ID=<%=funcID %>" hidefocus="true" style="outline: none; background-color:#E6B8B8">NOVA ADVERTÊNCIA</a>
+                                        </li>
+                                    </ul>
+                                    </div>                          
+                            
+                                                      
+<%
+                        set minhasAdvertencias = fulano.getRecordsetOfAdvertencia()
+                        if not (minhasAdvertencias.BOF and minhasAdvertencias.EOF) then
+    %>
+                                <table class="infotable" cellspacing="0" cellpadding="0" width="100%">
+							<thead>
+								<tr>
+                                    <th>
+										Titulo
+									</th>
+                                    <th>
+										Data Cadastro
+									</th>
+                                    <th>
+										Mês / Ano Referência
+									</th>
+                                    <th>
+										Testemunha
+									</th>
+                                    <th>
+										RG
+									</th>
+									<th class="small">
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+                                <%
+    
+                            while not minhasAdvertencias.EOF
+                               
+                                    %>
+                                <tr>
+                                    <td><%=  minhasAdvertencias("titulo") %></td>
+                                    <td><%= formataDatas( minhasAdvertencias("data") ) %></td>
+                                    <td><%=  minhasAdvertencias("mesReferencia") %> / <%=  minhasAdvertencias("anoReferencia") %> </td>
+                                    <td><%=  minhasAdvertencias("testemunha") %></td>
+                                    <td><%=  minhasAdvertencias("rgtestemunha") %></td>
+                                    <td class="small">
+										<a href="prtAdvertencia.asp?funcID=<%=funcID %>&vtID=<%=  minhasAdvertencias("ID") %>" target="_blank" title="imprimir"><img src="/Content/images/function-icons/printer-icon.png" style="border-width:0px;height:50%" alt="Imprimir" title="imprimir"/></a>
+										<div class="opmenu">
+
+											<div class="clear">
+											</div>
+											<div class="foot">
+											</div>
+										</div>
+									</td>
+
+                                </tr>
+                                <%
+
+                                minhasAdvertencias.movenext
+                            wend
+                        else
+                            response.Write "Não há advertências"
+                        end if
+                        minhasAdvertencias.close
+                        set minhasAdvertencias =nothing
+                         %>            
+                           </tbody>
+                        </table>
+                                                              
+                          </div>  
+                            
+            <div id="DivminhasAdvertencias2" class="message informationExp" style="margin:27px; width:785px;">
+                                <span class="strong">Informativo:</span> A declaração serve para chamar a atenção do funcionário, a fim de que se cumpra uma exigência.
+                                Clique em <b>NOVA ADVERTÊNCIA</b> para gerar uma declaração.
+                        </div>                               
+                            
+                            
+    FIM ADVERTENCIAS
+</body>
+</html>

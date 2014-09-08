@@ -1,9 +1,9 @@
 ﻿<!--#include file="conecta_bd.asp"--><%
 
-dim fulano, eleexiste, funcID, essecontrato, contratoExiste
+dim fulano, eleexiste, funcID, essecontrato
     eleexiste=false
 set fulano = new empregado
-funcID=limpaquerystring("ID")
+    funcID=limpaquerystring("ID")
 'busca via objeto os dados do cara
 if len(funcID)>0 then    
     fulano.ID=funcID
@@ -12,10 +12,8 @@ if len(funcID)>0 then
     if eleexiste then
         nome=fulano.Nome
         set essecontrato=new contrato 
-        contratoExiste=essecontrato.getFkrtContrato (funcID, true, 0 )
-        novoContratoID = essecontrato.contrato_ID
-    else
-        fulano.nome="Não Encontrado"
+        essecontrato.getFkrtContrato funcID, true, 0 
+    novoContratoID = essecontrato.contrato_ID
     end if
 end if
     
@@ -146,19 +144,22 @@ end if
     <div class="container_12">  
 		<div class="grid_12">
             <div class="sb-box">
-                
                 <div class="sb-box-inner content">
                     <div class="header">
                         <h3><%=fulano.nome %></h3>
+                        <ul class="tabs">
+                            <li class="active">
+                                <a href="empregado_ficha.asp?ID=<%=funcID %>" hidefocus="true" style="outline: none;">Voltar</a></li>
+                        </ul>
                     </div>
-                    <%  ' conteúdo vai aqui
-                        if eleexiste then %>
 
-                    <%else %>
-                    <h1>Funcionário não encontrado</h1>
-                    <%end if %>
-                    <!--qui-->
                 </div>
+
+
+
+               
+
+
             </div>
             <br />     
 		</div>
@@ -190,7 +191,6 @@ end if
 </body>
 </html>
 <%    
-     'destroy stuff hahahahah (mean laugh)
     set fulano=nothing
     set patrao=nothing
     set esseContrato=nothing %>
