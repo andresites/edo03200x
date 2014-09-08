@@ -1,0 +1,14 @@
+﻿div.esquerda
+{
+	margin:auto; 
+	float:left; 
+	width:50%;
+	clear:both;
+}
+
+div.direita
+{
+	margin:auto; 
+	float:right; 
+	width:50%;
+}
